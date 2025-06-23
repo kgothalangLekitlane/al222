@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { BookOpen, Mail } from "lucide-react"
+import { Mail } from "lucide-react"
 
 export function Footer() {
   return (
@@ -8,9 +8,24 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-                <BookOpen className="h-6 w-6 text-white" />
+            <div className="flex items-center space-x-3 mb-4">
+              {/* Alameda Lab Logo - Matching Homepage Design */}
+              <div className="relative w-12 h-12 flex-shrink-0">
+                {/* Main A shape - top rounded part */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-9 h-7 bg-white rounded-t-full"></div>
+
+                {/* White decorative dots - now teal on white background */}
+                <div className="absolute top-1 left-1/2 transform -translate-x-1/2 translate-x-1 w-1 h-1 bg-teal-500 rounded-full"></div>
+                <div className="absolute top-2 left-1/2 transform -translate-x-1/2 -translate-x-1 w-0.5 h-0.5 bg-teal-500 rounded-full"></div>
+                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 translate-x-1.5 w-0.5 h-0.5 bg-teal-500 rounded-full"></div>
+
+                {/* Lab coat/shirt icon in center - now teal */}
+                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-2 h-1.5 bg-teal-500 rounded-t-sm"></div>
+                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-3 h-2 bg-teal-500 rounded-b-sm"></div>
+
+                {/* Bottom split parts of A */}
+                <div className="absolute bottom-0 left-1 w-3.5 h-3 bg-white rounded-b-xl transform -rotate-12"></div>
+                <div className="absolute bottom-0 right-1 w-3.5 h-3 bg-white rounded-b-xl transform rotate-12"></div>
               </div>
               <span className="text-xl font-bold">Alameda Lab</span>
             </div>
@@ -21,7 +36,7 @@ export function Footer() {
             <div className="flex space-x-4">
               <div className="flex items-center text-sm text-cyan-100">
                 <Mail className="h-4 w-4 mr-2" />
-                info@alamedalab.com
+                admin@AlamedaLab.onmicrosoft.com
               </div>
             </div>
           </div>

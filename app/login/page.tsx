@@ -1,19 +1,15 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Eye, EyeOff, BookOpen } from "lucide-react"
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
-    email: "",
+    name: "",
     password: "",
   })
 
@@ -37,134 +33,94 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="container">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 relative">
+      {/* Decorative dots in corners */}
+      <div className="absolute top-8 left-8 flex space-x-2">
+        <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+        <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+        <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+      </div>
+      <div className="absolute top-8 right-8 flex space-x-2">
+        <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+        <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+        <div className="w-3 h-3 bg-teal-500 rounded-full"></div>
+      </div>
+
+      <div className="w-full max-w-sm space-y-8">
         {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <div className="flex items-center space-x-2">
-            <div className="bg-blue-600 p-2 rounded-lg">
-              <BookOpen className="h-6 w-6 text-white" />
+        <div className="flex flex-col items-center space-y-6">
+          <div className="relative">
+            {/* Main A shape */}
+            <div className="w-32 h-32 bg-teal-500 rounded-t-full relative flex items-center justify-center">
+              {/* White dots on the A */}
+              <div className="absolute top-4 left-8 w-2 h-2 bg-white rounded-full"></div>
+              <div className="absolute top-6 left-12 w-2 h-2 bg-white rounded-full"></div>
+              <div className="absolute top-8 right-12 w-2 h-2 bg-white rounded-full"></div>
+
+              {/* Lab coat/shirt icon in center */}
+              <div className="bg-white w-8 h-6 rounded-t-lg relative mt-4">
+                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-2 bg-white rounded-t-full"></div>
+              </div>
             </div>
-            <span className="text-2xl font-bold text-gray-900">Alameda Lab</span>
+
+            {/* Bottom part of A */}
+            <div className="flex justify-between -mt-4">
+              <div className="w-12 h-8 bg-teal-500 rounded-b-lg"></div>
+              <div className="w-12 h-8 bg-teal-500 rounded-b-lg"></div>
+            </div>
           </div>
+
+          {/* Login text */}
+          <h1 className="text-3xl font-bold text-teal-600">Login</h1>
         </div>
 
-        <h1>Welcome Back</h1>
-        <p className="mb-6">Sign in to continue your learning journey</p>
-
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="email" className="sr-only">
-              Email
-            </Label>
             <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email address"
-              value={formData.email}
+              name="name"
+              type="text"
+              placeholder="Name"
+              value={formData.name}
               onChange={handleInputChange}
               required
+              className="w-full h-14 px-6 bg-teal-200/50 border-0 rounded-full text-gray-700 placeholder-gray-500 text-center text-lg focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
             />
           </div>
 
-          <div className="relative">
-            <Label htmlFor="password" className="sr-only">
-              Password
-            </Label>
+          <div>
             <Input
-              id="password"
               name="password"
-              type={showPassword ? "text" : "password"}
+              type="password"
               placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
               required
+              className="w-full h-14 px-6 bg-teal-200/50 border-0 rounded-full text-gray-700 placeholder-gray-500 text-center text-lg focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
             />
-            <button
-              type="button"
-              className="absolute inset-y-0 right-0 pr-3 flex items-center"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <EyeOff className="h-4 w-4 text-gray-400" /> : <Eye className="h-4 w-4 text-gray-400" />}
-            </button>
           </div>
 
-          <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Signing in..." : "Sign In"}
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full h-14 bg-teal-600 hover:bg-teal-700 text-white text-lg font-medium rounded-full border-0 transition-colors disabled:opacity-50"
+          >
+            {isLoading ? "Logging in..." : "Log In"}
           </Button>
         </form>
 
-        <p className="mt-6">
-          Don't have an account?{" "}
-          <Link href="/register" className="text-blue-600 hover:text-blue-800 font-medium">
-            Sign up here
-          </Link>
-        </p>
-
-        <small className="block mt-4">
-          <Link href="/forgot-password" className="text-blue-600 hover:text-blue-800">
+        {/* Additional links */}
+        <div className="text-center space-y-2">
+          <p className="text-gray-600">
+            Don't have an account?{" "}
+            <Link href="/register" className="text-teal-600 hover:text-teal-700 font-medium">
+              Sign up here
+            </Link>
+          </p>
+          <Link href="/forgot-password" className="block text-teal-600 hover:text-teal-700 text-sm">
             Forgot your password?
           </Link>
-        </small>
-
-        <style jsx>{`
-          .container {
-            max-width: 400px;
-            margin: auto;
-            padding: 24px;
-            text-align: center;
-          }
-
-          h1 {
-            font-size: 28px;
-            color: #388e3c;
-            margin-bottom: 20px;
-            font-family: "Montserrat", sans-serif;
-          }
-
-          input {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 12px;
-            border: none;
-            border-radius: 8px;
-            background-color: #f5f5f5;
-            font-size: 16px;
-            box-sizing: border-box;
-          }
-
-          button[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            padding: 14px;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-          }
-
-          button[type="submit"]:hover {
-            background-color: #45a049;
-          }
-
-          button[type="submit"]:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-          }
-
-          p,
-          small {
-            color: #9e9e9e;
-            font-size: 14px;
-          }
-
-          input:focus {
-            outline: 2px solid #4caf50;
-            outline-offset: 2px;
-          }
-        `}</style>
+        </div>
       </div>
     </div>
   )

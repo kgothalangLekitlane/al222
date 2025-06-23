@@ -7,7 +7,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Alameda Lab - Educational Platform",
   description: "Comprehensive educational platform for grades 10-12",
-  generator: "v0.dev",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="antialiased">
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">{children}</main>

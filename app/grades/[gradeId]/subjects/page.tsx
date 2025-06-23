@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
-import { BookOpen, ArrowRight, Users, Clock } from "lucide-react"
+import { BookOpen, ArrowRight, Users, Clock, Calculator, Atom, FlaskRoundIcon as Flask, Leaf } from "lucide-react"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 
 interface Subject {
@@ -36,6 +36,38 @@ export default function SubjectsPage() {
     }
   }, [gradeId])
 
+  // Function to get the appropriate icon for each subject
+  const getSubjectIcon = (subjectName: string) => {
+    switch (subjectName.toLowerCase()) {
+      case "mathematics":
+        return Calculator
+      case "physics":
+        return Atom
+      case "physical sciences":
+        return Flask
+      case "life sciences":
+        return Leaf
+      default:
+        return BookOpen
+    }
+  }
+
+  // Function to get the appropriate color scheme for each subject
+  const getSubjectColorScheme = (subjectName: string) => {
+    switch (subjectName.toLowerCase()) {
+      case "mathematics":
+        return "bg-blue-100 text-blue-600"
+      case "physics":
+        return "bg-red-100 text-red-600"
+      case "physical sciences":
+        return "bg-green-100 text-green-600"
+      case "life sciences":
+        return "bg-purple-100 text-purple-600"
+      default:
+        return "bg-gray-100 text-gray-600"
+    }
+  }
+
   const fetchSubjects = async () => {
     try {
       setLoading(true)
@@ -50,7 +82,7 @@ export default function SubjectsPage() {
           description: "Mock grade description",
         }
 
-        // Replace the mockSubjects array with real curriculum data
+        // Replace the mockSubjects array with real curriculum data including Physics
         const curriculumData = {
           "1": {
             // Grade 10
@@ -76,24 +108,26 @@ export default function SubjectsPage() {
               },
               {
                 id: "2",
-                name: "Physical Sciences",
+                name: "Physics",
                 description:
-                  "Physics and chemistry fundamentals covering scientific skills, matter classification, atomic structure, chemical bonding, reactions, mechanics, and waves",
+                  "Fundamental physics concepts covering mechanics, motion, forces, waves, sound, light, and basic principles of physical phenomena",
                 grade_id: gradeId,
-                topic_count: 7,
-                estimated_hours: 42,
-                topics: [
-                  "Skills for Science",
-                  "Classification of Matter",
-                  "Atomic Structure",
-                  "Chemical Bonding",
-                  "Chemical Reactions",
-                  "Mechanics",
-                  "Waves, Sound, and Light",
-                ],
+                topic_count: 3,
+                estimated_hours: 25,
+                topics: ["Mechanics", "Waves, Sound, and Light", "Skills for Science"],
               },
               {
                 id: "3",
+                name: "Physical Sciences",
+                description:
+                  "Chemistry fundamentals covering matter classification, atomic structure, chemical bonding, reactions, and laboratory skills",
+                grade_id: gradeId,
+                topic_count: 4,
+                estimated_hours: 30,
+                topics: ["Classification of Matter", "Atomic Structure", "Chemical Bonding", "Chemical Reactions"],
+              },
+              {
+                id: "4",
                 name: "Life Sciences",
                 description:
                   "Biology covering biochemistry, cell biology, cell division, plant and animal tissues, biodiversity, classification, and ecology",
@@ -115,7 +149,7 @@ export default function SubjectsPage() {
             // Grade 11
             subjects: [
               {
-                id: "4",
+                id: "5",
                 name: "Mathematics",
                 description:
                   "Advanced mathematics including algebraic expressions, functions, number patterns, finance, trigonometry, analytical geometry, and statistics",
@@ -133,23 +167,27 @@ export default function SubjectsPage() {
                 ],
               },
               {
-                id: "5",
-                name: "Physical Sciences",
+                id: "6",
+                name: "Physics",
                 description:
-                  "Advanced physics and chemistry covering mechanics, waves, electricity, magnetism, chemical bonding, and reaction rates",
+                  "Advanced physics covering mechanics, vectors, scalars, waves, sound, electricity, magnetism, and electromagnetic phenomena",
                 grade_id: gradeId,
-                topic_count: 5,
-                estimated_hours: 35,
-                topics: [
-                  "Mechanics",
-                  "Waves and Sound",
-                  "Electricity and Magnetism",
-                  "Chemical Bonding",
-                  "Chemical Reactions",
-                ],
+                topic_count: 3,
+                estimated_hours: 28,
+                topics: ["Mechanics", "Waves and Sound", "Electricity and Magnetism"],
               },
               {
-                id: "6",
+                id: "7",
+                name: "Physical Sciences",
+                description:
+                  "Advanced chemistry covering molecular shapes, intermolecular forces, energy changes in reactions, and reaction rates",
+                grade_id: gradeId,
+                topic_count: 2,
+                estimated_hours: 22,
+                topics: ["Chemical Bonding", "Chemical Reactions"],
+              },
+              {
+                id: "8",
                 name: "Life Sciences",
                 description:
                   "Advanced biology covering biodiversity of microorganisms, plants, animals, environmental impact, photosynthesis, and respiration",
@@ -170,7 +208,7 @@ export default function SubjectsPage() {
             // Grade 12
             subjects: [
               {
-                id: "7",
+                id: "9",
                 name: "Mathematics",
                 description:
                   "Final year mathematics including sequences, series, advanced functions, finance, trigonometry, analytical geometry, calculus, and probability",
@@ -188,23 +226,27 @@ export default function SubjectsPage() {
                 ],
               },
               {
-                id: "8",
-                name: "Physical Sciences",
+                id: "10",
+                name: "Physics",
                 description:
-                  "Advanced physics and chemistry covering mechanics, electrodynamics, chemical equilibrium, acids and bases, and organic chemistry",
+                  "Advanced physics covering momentum, impulse, work, energy, power, electric circuits, and electromagnetic induction",
                 grade_id: gradeId,
-                topic_count: 5,
-                estimated_hours: 40,
-                topics: [
-                  "Mechanics",
-                  "Electrodynamics",
-                  "Chemical Equilibrium",
-                  "Acids and Bases",
-                  "Organic Chemistry",
-                ],
+                topic_count: 2,
+                estimated_hours: 25,
+                topics: ["Mechanics", "Electrodynamics"],
               },
               {
-                id: "9",
+                id: "11",
+                name: "Physical Sciences",
+                description:
+                  "Advanced chemistry covering chemical equilibrium, acids and bases, pH calculations, and organic chemistry",
+                grade_id: gradeId,
+                topic_count: 3,
+                estimated_hours: 30,
+                topics: ["Chemical Equilibrium", "Acids and Bases", "Organic Chemistry"],
+              },
+              {
+                id: "12",
                 name: "Life Sciences",
                 description:
                   "Advanced biology covering DNA, meiosis, human reproduction, genetics, inheritance, and evolution",
@@ -276,8 +318,8 @@ export default function SubjectsPage() {
             <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
             <div className="h-4 bg-gray-300 rounded w-96 mx-auto"></div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse">
                 <div className="bg-white rounded-2xl p-8 shadow-lg">
                   <div className="h-16 w-16 bg-gray-300 rounded-xl mb-6"></div>
@@ -340,51 +382,52 @@ export default function SubjectsPage() {
         {/* Subjects Grid */}
         {subjects.length > 0 ? (
           <div className="grid gap-8 md:gap-10">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {subjects.map((subject, index) => (
-                <div key={subject.id} className="group">
-                  <Link
-                    href={`/subjects/${subject.id}/topics`}
-                    className="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-1"
-                  >
-                    <div className="p-8">
-                      <div className="flex items-center justify-between mb-6">
-                        <div
-                          className={`inline-flex items-center justify-center w-16 h-16 rounded-xl ${
-                            index % 3 === 0
-                              ? "bg-blue-100 text-blue-600"
-                              : index % 3 === 1
-                                ? "bg-green-100 text-green-600"
-                                : "bg-purple-100 text-purple-600"
-                          }`}
-                        >
-                          <BookOpen className="h-8 w-8" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {subjects.map((subject) => {
+                const IconComponent = getSubjectIcon(subject.name)
+                const colorScheme = getSubjectColorScheme(subject.name)
+
+                return (
+                  <div key={subject.id} className="group">
+                    <Link
+                      href={`/subjects/${subject.id}/topics`}
+                      className="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-1"
+                    >
+                      <div className="p-8">
+                        <div className="flex items-center justify-between mb-6">
+                          <div
+                            className={`inline-flex items-center justify-center w-16 h-16 rounded-xl ${colorScheme}`}
+                          >
+                            <IconComponent className="h-8 w-8" />
+                          </div>
+                          <ArrowRight className="h-6 w-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
                         </div>
-                        <ArrowRight className="h-6 w-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
+
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                          {subject.name}
+                        </h3>
+
+                        <p className="text-gray-600 mb-6 text-base leading-relaxed line-clamp-3">
+                          {subject.description}
+                        </p>
+
+                        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                          <div className="flex items-center text-sm text-gray-500">
+                            <Users className="h-4 w-4 mr-2" />
+                            <span className="font-medium">{subject.topic_count} topics</span>
+                          </div>
+                          <div className="flex items-center text-sm text-gray-500">
+                            <Clock className="h-4 w-4 mr-2" />
+                            <span className="font-medium">{subject.estimated_hours}h</span>
+                          </div>
+                        </div>
                       </div>
 
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                        {subject.name}
-                      </h3>
-
-                      <p className="text-gray-600 mb-6 text-base leading-relaxed line-clamp-3">{subject.description}</p>
-
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div className="flex items-center text-sm text-gray-500">
-                          <Users className="h-4 w-4 mr-2" />
-                          <span className="font-medium">{subject.topic_count} topics</span>
-                        </div>
-                        <div className="flex items-center text-sm text-gray-500">
-                          <Clock className="h-4 w-4 mr-2" />
-                          <span className="font-medium">{subject.estimated_hours}h</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                  </Link>
-                </div>
-              ))}
+                      <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    </Link>
+                  </div>
+                )
+              })}
             </div>
           </div>
         ) : (

@@ -11,7 +11,19 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { AlertCircle, Plus, Edit, Trash2, Upload, BookOpen, Database, Download } from "lucide-react"
+import {
+  AlertCircle,
+  Plus,
+  Edit,
+  Trash2,
+  Upload,
+  BookOpen,
+  Database,
+  Download,
+  Video,
+  Play,
+  FileVideo,
+} from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function AdminContentPage() {
@@ -32,6 +44,13 @@ export default function AdminContentPage() {
 
   // Form states
   const [gradeForm, setGradeForm] = useState({ name: "", description: "" })
+  const [videoForm, setVideoForm] = useState({
+    title: "",
+    description: "",
+    url: "",
+    topic_id: "",
+    file: null as File | null,
+  })
 
   const seedSampleCurriculum = async () => {
     setIsSeeding(true)
@@ -71,6 +90,32 @@ export default function AdminContentPage() {
       setError("Failed to create grade")
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleVideoUpload = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    try {
+      // Mock video upload
+      console.log("Uploading video:", videoForm)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      setSuccess("Video uploaded successfully!")
+      setVideoForm({ title: "", description: "", url: "", topic_id: "", file: null })
+    } catch (error) {
+      setError("Failed to upload video")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setVideoForm({ ...videoForm, file })
     }
   }
 
@@ -261,8 +306,116 @@ export default function AdminContentPage() {
         </TabsContent>
 
         <TabsContent value="videos" className="space-y-4">
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Videos management will be available here.</p>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Upload className="h-5 w-5" />
+                  Upload New Video
+                </CardTitle>
+                <CardDescription>Upload educational videos for topics</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleVideoUpload} className="space-y-4">
+                  <div>
+                    <Label htmlFor="video-title">Video Title</Label>
+                    <Input
+                      id="video-title"
+                      placeholder="e.g., Introduction to Algebra"
+                      value={videoForm.title}
+                      onChange={(e) => setVideoForm({ ...videoForm, title: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="video-description">Description</Label>
+                    <Textarea
+                      id="video-description"
+                      placeholder="Video description..."
+                      value={videoForm.description}
+                      onChange={(e) => setVideoForm({ ...videoForm, description: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="video-url">Video URL (Optional)</Label>
+                    <Input
+                      id="video-url"
+                      placeholder="https://youtube.com/watch?v=..."
+                      value={videoForm.url}
+                      onChange={(e) => setVideoForm({ ...videoForm, url: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="video-file">Upload Video File</Label>
+                    <Input
+                      id="video-file"
+                      type="file"
+                      accept="video/*"
+                      onChange={handleFileChange}
+                      className="cursor-pointer"
+                    />
+                    {videoForm.file && (
+                      <p className="text-sm text-muted-foreground mt-1">Selected: {videoForm.file.name}</p>
+                    )}
+                  </div>
+                  <div>
+                    <Label htmlFor="topic-select">Topic</Label>
+                    <Input
+                      id="topic-select"
+                      placeholder="Select or enter topic ID"
+                      value={videoForm.topic_id}
+                      onChange={(e) => setVideoForm({ ...videoForm, topic_id: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <Button type="submit" disabled={loading} className="w-full">
+                    {loading ? "Uploading..." : "Upload Video"}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Video className="h-5 w-5" />
+                  Existing Videos ({videos.length})
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 max-h-96 overflow-y-auto">
+                  {videos.length > 0 ? (
+                    videos.map((video) => (
+                      <div key={video.id} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <FileVideo className="h-4 w-4 text-muted-foreground" />
+                          <div>
+                            <p className="font-medium">{video.title}</p>
+                            <p className="text-sm text-muted-foreground">Topic ID: {video.topic_id}</p>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline">
+                            <Play className="h-3 w-3" />
+                          </Button>
+                          <Button size="sm" variant="outline">
+                            <Edit className="h-3 w-3" />
+                          </Button>
+                          <Button size="sm" variant="destructive" onClick={() => handleDelete("videos", video.id)}>
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8">
+                      <FileVideo className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground">No videos uploaded yet</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
