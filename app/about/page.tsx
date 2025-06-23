@@ -61,7 +61,7 @@ export default function AboutPage() {
       <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Alameda Learn</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Alameda Lab</h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               We are dedicated to providing exceptional educational resources that empower students to achieve their
               academic goals and unlock their full potential.
@@ -77,8 +77,8 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Mission</h2>
               <p className="text-lg text-gray-600 mb-6">
-                At Alameda Learn, we believe that every student deserves access to high-quality education. Our mission
-                is to make learning engaging, accessible, and effective for students in grades 10-12.
+                At Alameda Lab, we believe that every student deserves access to high-quality education. Our mission is
+                to make learning engaging, accessible, and effective for students in grades 10-12.
               </p>
               <p className="text-lg text-gray-600 mb-8">
                 We combine expert knowledge with innovative technology to create comprehensive learning experiences that
@@ -111,7 +111,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              These core values guide everything we do at Alameda Learn
+              These core values guide everything we do at Alameda Lab
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -165,7 +165,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Your Learning Journey?</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of students who have transformed their academic performance with Alameda Learn
+            Join thousands of students who have transformed their academic performance with Alameda Lab
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary">

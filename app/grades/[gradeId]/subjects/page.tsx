@@ -50,32 +50,174 @@ export default function SubjectsPage() {
           description: "Mock grade description",
         }
 
-        const mockSubjects = [
-          {
-            id: "1",
-            name: "Mathematics",
-            description: "Comprehensive mathematics curriculum covering algebra, geometry, and calculus",
-            grade_id: gradeId,
-            topic_count: 8,
-            estimated_hours: 45,
+        // Replace the mockSubjects array with real curriculum data
+        const curriculumData = {
+          "1": {
+            // Grade 10
+            subjects: [
+              {
+                id: "1",
+                name: "Mathematics",
+                description:
+                  "Comprehensive mathematics curriculum covering algebraic expressions, equations, functions, number patterns, finance, geometry, trigonometry, and statistics",
+                grade_id: gradeId,
+                topic_count: 8,
+                estimated_hours: 45,
+                topics: [
+                  "Algebraic Expressions",
+                  "Equations and Inequalities",
+                  "Functions and Graphs",
+                  "Number Patterns",
+                  "Finance",
+                  "Geometry",
+                  "Trigonometry",
+                  "Statistics",
+                ],
+              },
+              {
+                id: "2",
+                name: "Physical Sciences",
+                description:
+                  "Physics and chemistry fundamentals covering scientific skills, matter classification, atomic structure, chemical bonding, reactions, mechanics, and waves",
+                grade_id: gradeId,
+                topic_count: 7,
+                estimated_hours: 42,
+                topics: [
+                  "Skills for Science",
+                  "Classification of Matter",
+                  "Atomic Structure",
+                  "Chemical Bonding",
+                  "Chemical Reactions",
+                  "Mechanics",
+                  "Waves, Sound, and Light",
+                ],
+              },
+              {
+                id: "3",
+                name: "Life Sciences",
+                description:
+                  "Biology covering biochemistry, cell biology, cell division, plant and animal tissues, biodiversity, classification, and ecology",
+                grade_id: gradeId,
+                topic_count: 6,
+                estimated_hours: 38,
+                topics: [
+                  "The Chemistry of Life",
+                  "Cells: The Basic Units of Life",
+                  "Cell Division: Mitosis",
+                  "Plant and Animal Tissues",
+                  "Biodiversity and Classification",
+                  "Ecology",
+                ],
+              },
+            ],
           },
-          {
-            id: "2",
-            name: "Physical Sciences",
-            description: "Physics and chemistry fundamentals with practical applications",
-            grade_id: gradeId,
-            topic_count: 6,
-            estimated_hours: 38,
+          "2": {
+            // Grade 11
+            subjects: [
+              {
+                id: "4",
+                name: "Mathematics",
+                description:
+                  "Advanced mathematics including algebraic expressions, functions, number patterns, finance, trigonometry, analytical geometry, and statistics",
+                grade_id: gradeId,
+                topic_count: 7,
+                estimated_hours: 40,
+                topics: [
+                  "Algebraic Expressions and Equations",
+                  "Functions and Graphs",
+                  "Number Patterns",
+                  "Finance",
+                  "Trigonometry",
+                  "Analytical Geometry",
+                  "Statistics",
+                ],
+              },
+              {
+                id: "5",
+                name: "Physical Sciences",
+                description:
+                  "Advanced physics and chemistry covering mechanics, waves, electricity, magnetism, chemical bonding, and reaction rates",
+                grade_id: gradeId,
+                topic_count: 5,
+                estimated_hours: 35,
+                topics: [
+                  "Mechanics",
+                  "Waves and Sound",
+                  "Electricity and Magnetism",
+                  "Chemical Bonding",
+                  "Chemical Reactions",
+                ],
+              },
+              {
+                id: "6",
+                name: "Life Sciences",
+                description:
+                  "Advanced biology covering biodiversity of microorganisms, plants, animals, environmental impact, photosynthesis, and respiration",
+                grade_id: gradeId,
+                topic_count: 5,
+                estimated_hours: 33,
+                topics: [
+                  "Biodiversity of Microorganisms",
+                  "Biodiversity of Plants",
+                  "Biodiversity of Animals",
+                  "Human Impact on the Environment",
+                  "Photosynthesis and Respiration",
+                ],
+              },
+            ],
           },
-          {
-            id: "3",
-            name: "Life Sciences",
-            description: "Biology covering cells, genetics, ecology and human systems",
-            grade_id: gradeId,
-            topic_count: 7,
-            estimated_hours: 42,
+          "3": {
+            // Grade 12
+            subjects: [
+              {
+                id: "7",
+                name: "Mathematics",
+                description:
+                  "Final year mathematics including sequences, series, advanced functions, finance, trigonometry, analytical geometry, calculus, and probability",
+                grade_id: gradeId,
+                topic_count: 7,
+                estimated_hours: 48,
+                topics: [
+                  "Sequences and Series",
+                  "Functions and Graphs",
+                  "Finance",
+                  "Trigonometry",
+                  "Analytical Geometry",
+                  "Calculus",
+                  "Probability",
+                ],
+              },
+              {
+                id: "8",
+                name: "Physical Sciences",
+                description:
+                  "Advanced physics and chemistry covering mechanics, electrodynamics, chemical equilibrium, acids and bases, and organic chemistry",
+                grade_id: gradeId,
+                topic_count: 5,
+                estimated_hours: 40,
+                topics: [
+                  "Mechanics",
+                  "Electrodynamics",
+                  "Chemical Equilibrium",
+                  "Acids and Bases",
+                  "Organic Chemistry",
+                ],
+              },
+              {
+                id: "9",
+                name: "Life Sciences",
+                description:
+                  "Advanced biology covering DNA, meiosis, human reproduction, genetics, inheritance, and evolution",
+                grade_id: gradeId,
+                topic_count: 5,
+                estimated_hours: 35,
+                topics: ["DNA: Code of Life", "Meiosis", "Human Reproduction", "Genetics and Inheritance", "Evolution"],
+              },
+            ],
           },
-        ]
+        }
+
+        const mockSubjects = curriculumData[gradeId]?.subjects || []
 
         setGrade(mockGrade)
         setSubjects(mockSubjects)

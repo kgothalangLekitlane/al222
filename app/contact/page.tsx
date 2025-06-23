@@ -36,7 +36,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      details: "info@alameda-learn.com",
+      details: "info@alamedalab.com",
       description: "Send us an email anytime",
     },
     {
